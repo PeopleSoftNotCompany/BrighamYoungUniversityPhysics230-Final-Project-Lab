@@ -2,5 +2,13 @@ Gemeral To do lists:
 
 1.  Set up and configure the GitHub repositary.
 (part of this is the tutorial on Canvas)
+# Note this is more complicated than it need to be, by doing it through the command line.
 
-2.  
+2.  Rockets:
+  a.  Fuel.  Seems to be Rb.1 (Kerosene but better) along with Liquid Oxygen.  At least for space X.
+  b.  Units of measurement.  Seems to be in Newtons as a form of thrust.  Constant force and mass = constant acceleration 
+  Stats.  845 KN for Falcon 9 and Falcon heavy.  In space  981 and 981.  The Draco and Super draco rockets are much less pwoerufl (at most 735 KN)  Starship?
+
+What is FT and is 230 Ft / 507 klbf any good?  vs 258 tf and 568 klbf  but what of 1,500 TF and 3.3 MLBF?  7590 TF vs 16.7 Mlbf?
+
+1 tf = 9.80665 KiloNewtons  So do the math or whatever
