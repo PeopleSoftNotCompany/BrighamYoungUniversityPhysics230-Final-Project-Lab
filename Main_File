@@ -1,3 +1,190 @@
+(*Seth Read's Code*)
+
+Relativistic Travel at Constant Acceleration - Seth Read and Alexander Gunther
+
+Relativistic Travel Through Space: Get a feel for how fast light is!
+
+In[1391]:= a= ChoiceDialog[
+  Column[{
+    "Please enter your acceleration in m/(s^2):",
+    InputField[Dynamic[input], Number],
+    DefaultButton[DialogReturn[input]]
+  }]
+];
+accel[t_] := (a*t)/Sqrt[1+((a*t)/(3*10^8))^2];
+(*This formula gives us the velocity
+per time based on the acceleration you choose*)
+time = 3600*ChoiceDialog[
+  Column[{
+    "Please choose your time traveled in hours:",
+    InputField[Dynamic[input2], Number],
+    DefaultButton[DialogReturn[input2]]
+  }]
+];
+dist = NIntegrate[accel[t],{t,0,time
+}];
+(*This formula gives us the distance travelled in 100 seconds*)
+Print[dist,"m is the distance traveled in ", time/3600," hours with an
+acceleration of ",a, "\!\(\*FractionBox[\(m\), SuperscriptBox[\(s\), \(2\)]]\)."]
+Print[
+"This is ",(100*dist)/(3*10^8*time),"% of the distance traveled if you were somehow going the speed of light the entire time."
+
+]
+
+During evaluation of In[1391]:= 2.8211*10^15m is the distance traveled in 3000 hours with an
+acceleration of 200m/s^2.
+
+During evaluation of In[1391]:= This is 87.071% of the distance traveled if you were somehow going the speed of light the entire time.
+
+What if Einstein was wrong and Newtonian physics held-up at high speeds -- and you could travel at an infinite speed?
+
+a= ChoiceDialog[
+  Column[{
+    "Please enter your acceleration in m/(s^2):",
+    InputField[Dynamic[input], Number],
+    DefaultButton[DialogReturn[input]]
+  }]
+];
+accel[t_] := (a*t)/Sqrt[1+((a*t)/(3*10^8))^2];
+(*This formula gives us the velocity
+per time based on the acceleration you choose*)
+time = 3600*ChoiceDialog[
+  Column[{
+    "Please choose your time traveled in hours:",
+    InputField[Dynamic[input2], Number],
+    DefaultButton[DialogReturn[input2]]
+  }]
+];
+dist = NIntegrate[accel[t],{t,0,time}];
+(*This formula gives us the distance travelled in 100 seconds*)
+Print[dist,"m is the distance traveled in ", time/3600," hours with an
+acceleration of ",a, "\!\(\*FractionBox[\(m\), SuperscriptBox[\(s\), \(2\)]]\)."]
+Print[
+"This is ",(100*dist)/(1/2 a*(time)^2),"% of the distance traveled if you could accelerate to faster than the speed of light, ie if Newtonian Physics was correct."
+
+]
+
+During evaluation of In[1146]:= 3.19531*10^16m is the distance traveled in 30000 hours with an
+acceleration of 200m/s^2.
+
+During evaluation of In[1146]:= This is 2.73947% of the distance traveled if you could accelerate to faster than the speed of light, ie if Newtonian Physics was correct.
+
+A Graph showing why you can never travel faster than light goes through space!
+
+In[40]:= Manipulate[
+ Plot[(a*t)/Sqrt[1+((a*t)/(3*10^8))^2], {t, 0, 2000},
+ AxesLabel->{"Time(s)","Velocity(m/s)"},
+ PlotLabel->"Velocity of Craft",ImageSize->Large,PlotRange->All],
+ {{a, 0, "Accel"},0,10^7,ControlType->Slider}, ControlPlacement->Top
+]
+Print["This is your velocity with an acceleration of between 0 to \!\(\*SuperscriptBox[\(10\), \(7\)]\)\!\(\*FractionBox[\(m\), \(s\)]\). 
+Notice how it begins to level out as it approaches 3*\!\(\*SuperscriptBox[\(10\), \(8\)]\)\!\(\*FractionBox[\(m\), \(s\)]\), 
+which is the speed of light, showing that your craft can never surpass 
+the speed of light no matter how high your acceleration becomes."]
+
+Out[40]= Manipulate[Plot[a*(t/Sqrt[1 + (a*(t/(3*10^8)))^2]), {t, 0, 2000}, 
+   AxesLabel -> {"Time(s)", "Velocity(m/s)"}, 
+   PlotLabel -> "Velocity of Craft", ImageSize -> Large, PlotRange -> All], 
+  {{a, 3.85*^6, "Accel"}, 0, 10000000, ControlType -> Slider}, 
+  ControlPlacement -> Top]
+
+During evaluation of In[40]:= This is your velocity with an acceleration of between 0 to 10^7m/s. 
+Notice how it begins to level out as it approaches 3*10^8m/s, 
+which is the speed of light, showing that your craft can never surpass 
+the speed of light no matter how high your acceleration becomes.
+
+Now we begin to examine Interplanetary Travel! Starting with Deceleration so you don't die on impact...
+
+In[272]:= Manipulate[
+ Plot[Piecewise[{{(a*t)/Sqrt[1+((a*t)/(3*10^8))^2],t<=1000},{(a*(2000-t))/Sqrt[1+((a*(2000-t))/(3*10^8))^2],t>1000}}], {t, 0, 2000},
+ AxesLabel->{"Time(s)","Velocity(m/s)"},
+ PlotLabel->"Velocity of Craft",ImageSize->Large,PlotRange->All],
+ {{a, 0, "Accel"},0,10^7,ControlType->Slider}, ControlPlacement->Top
+]
+Print["This is your velocity with an acceleration of between 0 to \!\(\*SuperscriptBox[\(10\), \(7\)]\)\!\(\*FractionBox[\(m\), \(s\)]\) during a round trip. 
+Notice how it begins to level out as it approaches 3*\!\(\*SuperscriptBox[\(10\), \(8\)]\)\!\(\*FractionBox[\(m\), \(s\)]\) before you turn, 
+which is the speed of light, showing that your craft can never surpass 
+the speed of light no matter how high your acceleration becomes. You reach 0\!\(\*FractionBox[\(m\), \(s\)]\) before landing as to not die."]
+
+Out[272]= Manipulate[Plot[Piecewise[{{a*(t/Sqrt[1 + (a*(t/(3*10^8)))^2]), t <= 1000}, 
+     {a*((2000 - t)/Sqrt[1 + (a*((2000 - t)/(3*10^8)))^2]), t > 1000}}], 
+   {t, 0, 2000}, AxesLabel -> {"Time(s)", "Velocity(m/s)"}, 
+   PlotLabel -> "Velocity of Craft", ImageSize -> Large, PlotRange -> All], 
+  {{a, 450000., "Accel"}, 0, 10000000, ControlType -> Slider}, 
+  ControlPlacement -> Top]
+
+During evaluation of In[272]:= This is your velocity with an acceleration of between 0 to 10^7m/s during a round trip. 
+Notice how it begins to level out as it approaches 3*10^8m/s before you turn, 
+which is the speed of light, showing that your craft can never surpass 
+the speed of light no matter how high your acceleration becomes. You reach 0m/s before landing as to not die.
+
+Interplanetary Travel in Our Solar System
+
+In[1367]:= (*spent forever trying to get it work this way. Had to hardcode it. Enjoy your experience traveling amongst the planets at 2g's, or 20m/s^2*)
+SemanticInterpretation["average distance between earth and mercury in meters"]
+SemanticInterpretation["average distance between earth and venus in meters"]
+SemanticInterpretation["average distance between earth and mars in meters"]
+SemanticInterpretation["average distance between earth and jupiter in meters"]
+SemanticInterpretation["average distance between earth and saturn in meters"]
+SemanticInterpretation["average distance between earth and uranus in meters"]
+SemanticInterpretation["average distance between earth and neptune in meters"]
+SemanticInterpretation["average distance between earth and pluto in meters"]
+SemanticInterpretation["average distance between earth and the moon in meters"]
+
+Out[1367]= Quantity[1.55*10^11, "Meters"]
+
+Out[1368]= Quantity[1.70*10^11, "Meters"]
+
+Out[1369]= Quantity[2.54*10^11, "Meters"]
+
+Out[1370]= Quantity[7.87*10^11, "Meters"]
+
+Out[1371]= Quantity[1.43*10^12, "Meters"]
+
+Out[1372]= Quantity[2.88*10^12, "Meters"]
+
+Out[1373]= Quantity[4.50*10^12, "Meters"]
+
+Out[1374]= Quantity[6.11*10^12, "Meters"]
+
+Out[1375]= Quantity[3.850*10^8, "Meters"]
+
+distance[x_,t_]:= Evaluate[Integrate[accel[t]/.{a->x},{t,0,t}]]
+planetarydistance = {1.55*10^11,1.7*10^11,2.45*10^11,7.87*10^11,1.43*10^12,2.88*10^12,4.50*10^12,6.11*10^12,3.85*10^8,4*10^16};
+planet = ChoiceDialog[Column[{TextCell["Please choose your destination!"],Grid[Partition[{
+Button["mercury", DialogReturn[1]],
+Button["venus", DialogReturn[2]],
+Button["mars", DialogReturn[3]],
+Button["jupiter", DialogReturn[4]],
+Button["saturn", DialogReturn[5]],
+Button["uranus", DialogReturn[6]],
+Button["neptune", DialogReturn[7]],
+Button["pluto", DialogReturn[8]],
+Button["the moon", DialogReturn[9]],
+Button["Alpha Centauri", DialogReturn[10]]
+}, 2, 2,{1, 1},{}]]}]]; (*chosing your planet*)
+acceleration = 20;
+(*this is assuming we can double the time for the halfway travel bc the graph is symetric*)
+timeoftravel = (2t)/31536000/.Solve[planetarydistance[[planet]]/2 == Evaluate[Integrate[(acceleration*t)/Sqrt[1+((acceleration*t)/(3*10^8))^2],{t,0,t}]]][[2]]//N;
+Print["It will take "]
+Which[timeoftravel>=1,
+Print[timeoftravel," earth years"],
+365*timeoftravel>=1,Print[timeoftravel*365," earth days"],
+timeoftravel*365*24>=1,Print[timeoftravel*365*24," earth hours"],
+timeoftravel*365*24*60>=1,Print[timeoftravel*365*24*60," earth minutes"],
+timeoftravel*365*24*60*60>=0,Print[timeoftravel*365*24*60*60," earth seconds"]]
+Print["to travel to your destination with a constant acceleration of 2g's (survivable, but uncomfortable)
+until halfway, then switch to decelerate at the same rate 
+at halfway so you can land safely."]
+
+During evaluation of In[1376]:= It will take 
+
+During evaluation of In[1376]:= 5.09115 earth years
+
+During evaluation of In[1376]:= to travel to your destination with a constant acceleration of 2g's (survivable, but uncomfortable)
+until halfway, then switch to decelerate at the same rate 
+at halfway so you can land safely.
+
 (*Alex G's Section*)
 Fortunately, there is time dilation so it doesn't appear to you to take as long to get there! Let's explore this concept with a trip to Alpha Centauri - a trio of stars close by!
 
@@ -25,3 +212,26 @@ a pretty far distance!
 Using our old math it would take us 5.06464 years to travel there.  But with relativisitc motion we see that it takes 2.20763 years instead!
 Of course all of this
 is relative to the us on the rocket ship.  To our friend Jared however it would still look like it would only take 5.06464 years to get to Alpha Centauri
+
+Sports Aside -- Einstein plays baseball (with a robotic arm) and destroys the world
+
+Relativistic Baseball
+
+b = ChoiceDialog["Choose your speed as a fraction of the speed of light",{".7",".9",".95",".99"}]//ToExpression;
+Print["speed = ",b*3*10^8//N]
+mass = .145; (*mass of baseball in kg*)
+armlength = .6;(*length of the avg human arm in m*)
+arc = armlength*\[Pi]; (*distance of acceleration, assuming throwing motion of a half-circle*)
+force = (1/Sqrt[1-(b)^2])^3 (mass)ab /. {ab->(b*3*10^8)^2/(2*arc)};
+Print["Einstein would have to exert a force of ", force, " Newtons in order to make the baseball travel at ", b*100, "% of the speed of light."]
+energy = (1/Sqrt[1-(b)^2]-1)(mass)(3*10^8)^2;
+Print["This baseball would carry a KE of ", energy, "J. This is about the equvilant of ", Round[energy/(8*10^13)], " atom bombs."]
+Print["Even with a 'speed limit' in the universe, particles do not have a limit on their KE as long as we have more energy to give them."]
+
+speed = 2.97*10^8
+
+Einstein would have to exert a force of 1.20857*10^18 Newtons in order to make the baseball travel at 99.% of the speed of light.
+
+This baseball would carry a KE of 7.9459*10^16J. This is about the equvilant of 993 atom bombs.
+
+Even with a 'speed limit' in the universe, particles do not have a limit on their KE as long as we have more energy to give them.
