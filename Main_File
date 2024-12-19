@@ -1,31 +1,27 @@
-(*My section*)
-Fortunately, there is time dilation so you don't die before you get there ;)
+(*Alex G's Section*)
+Fortunately, there is time dilation so it doesn't appear to you to take as long to get there! Let's explore this concept with a trip to Alpha Centauri - a trio of stars close by!
 
 (**)
 TimeDialation = Integrate[timeoftravel/Sqrt[1-(accel[timeoftravel])^2/(3*10^8)^2],{t,0,timeoftravel}];
 a=20;
-timeoftravel;
 
 timeoftravel2 = (2t)/31536000/.Solve[(3.97535*10^16)/2 == Evaluate[Integrate[(acceleration*t)/Sqrt[1+((acceleration*t)/(3*10^8))^2],{t,0,t}]]][[2]]//N;
-TimeDialation2 = Integrate[timeoftravel2/Sqrt[1-(accel[timeoftravel])^2/(3*10^8)^2],{t,0,timeoftravel}] ;
+TimeDialation2 = (timeoftravel2*31536000)/(1/Sqrt[1-(.9*3*10^8)^2/(3*10^8)^2]);
 Print["The equation for time dialation is t' =\!\(\*FractionBox[\(\(t\)\(\\\ \)\), SqrtBox[\(1 - \*FractionBox[SuperscriptBox[\(v\), \(2\)], SuperscriptBox[\(c\), \(2\)]]\)]]\).  Where t' is time measured from the perspective of the person traveling the speed of light.\nIn essence the faster you move, the 'shorter' the world becomes.  
-So if we apply our time dilation math to our base value of ",timeoftravel," hours, and apply our time dilation math we get ",TimeDialation " hours"]
+So if we apply our time dilation math to our base value of ",timeoftravel," years, and apply our time dilation math we get ",TimeDialation2/31536000 " years"]
 
 Print["It can be hard to grasp how much this changes things.  Let's look at a distance like Alpha Centauri.  Located around 4.2 Light Years away that's 3.9735*\!\(\*SuperscriptBox[\(10\), \(16\)]\) meters, 
-a pretty far distance!\nUsing our old math it would take us ", timeoftravel2, " hours to travel there.  But with relativisitc motion we see that it takes ", TimeDialation2, " hours instead!\nOf course all of this
-is relative to the us on the rocket ship.  To our friend Jared however it would still look like it would only take ", timeoftravel2 "hours to get to Alpha Centauri"]
+a pretty far distance!\nUsing our old math it would take us ", timeoftravel2, " years to travel there.  But with relativisitc motion we see that it takes ", TimeDialation2/31536000, " years instead!\nOf course all of this
+is relative to the us on the rocket ship.  To our friend Jared however it would still look like it would only take ", timeoftravel2 "years to get to Alpha Centauri"]
 
 
 
 (*Plot[Integrate[timeoftravel/Sqrt[1-accel[t]/c^2],{t,0,timeoftravel}],{t,0,timeoftravel}]*)
 
-
-The equation for time dialation is t' =t /Sqrt[1-v^2/c^2].  Where t' is time measured from the perspective of the person traveling the speed of light.
-In essence the faster you move, the 'shorter' the world becomes.  
-So if we apply our time dilation math to our base value of 0.000212716 hours, and apply our time dilation math we get 4.5248*10^-8  hours
+The equation for time dialation is t' =t /Sqrt[1-v^2/c^2].  Where t' is time measured from the perspective of the person traveling the speed of light.\nIn essence the faster you move, the 'shorter' the world becomes.  \nSo if we apply our time dilation math to our base value of 5.09115 years, and apply our time dilation math we get 2.20763  years
 
 It can be hard to grasp how much this changes things.  Let's look at a distance like Alpha Centauri.  Located around 4.2 Light Years away that's 3.9735*10^16 meters, 
 a pretty far distance!
-Using our old math it would take us 5.06464 hours to travel there.  But with relativisitc motion we see that it takes 0.00107733 hours instead!
+Using our old math it would take us 5.06464 years to travel there.  But with relativisitc motion we see that it takes 2.20763 years instead!
 Of course all of this
-is relative to the us on the rocket ship.  To our friend Jared however it would still look like it would only take 5.06464 hours to get to Alpha Centauri
+is relative to the us on the rocket ship.  To our friend Jared however it would still look like it would only take 5.06464 years to get to Alpha Centauri
